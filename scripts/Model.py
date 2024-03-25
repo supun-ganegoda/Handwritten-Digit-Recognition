@@ -73,9 +73,53 @@ def preProcessImage(img):
     img  = img/ 255
     return img 
 
+
 X_train = np.array(list(map(preProcessImage,X_train)))
 X_test = np.array(list(map(preProcessImage,X_test)))
 X_validation = np.array(list(map(preProcessImage,X_validation)))
+
+# ------------------------------------------------------------Creating batches if memory is not sufficient 
+# batch_size = 1000  # Adjust batch size according to your memory constraints
+
+# # Preprocess training images
+# num_train_batches = (len(X_train) + batch_size - 1) // batch_size
+# for i in range(num_train_batches):
+#     start_idx = i * batch_size
+#     end_idx = min((i + 1) * batch_size, len(X_train))
+#     batch_images = X_train[start_idx:end_idx]
+#     processed_images = np.array([preProcessImage(img) for img in batch_images])
+#     if i == 0:
+#         X_train_processed = processed_images
+#     else:
+#         X_train_processed = np.concatenate((X_train_processed, processed_images), axis=0)
+
+# # Preprocess test images
+# num_test_batches = (len(X_test) + batch_size - 1) // batch_size
+# for i in range(num_test_batches):
+#     start_idx = i * batch_size
+#     end_idx = min((i + 1) * batch_size, len(X_test))
+#     batch_images = X_test[start_idx:end_idx]
+#     processed_images = np.array([preProcessImage(img) for img in batch_images])
+#     if i == 0:
+#         X_test_processed = processed_images
+#     else:
+#         X_test_processed = np.concatenate((X_test_processed, processed_images), axis=0)
+
+# # Preprocess validation images
+# num_validation_batches = (len(X_validation) + batch_size - 1) // batch_size
+# for i in range(num_validation_batches):
+#     start_idx = i * batch_size
+#     end_idx = min((i + 1) * batch_size, len(X_validation))
+#     batch_images = X_validation[start_idx:end_idx]
+#     processed_images = np.array([preProcessImage(img) for img in batch_images])
+#     if i == 0:
+#         X_validation_processed = processed_images
+#     else:
+#         X_validation_processed = np.concatenate((X_validation_processed, processed_images), axis=0)
+
+# X_train = X_train_processed
+# X_test = X_test_processed
+# X_validation = X_validation_processed
 
 print('After pre-processing...\n')
 print("Shape of training set: ",X_train.shape)
